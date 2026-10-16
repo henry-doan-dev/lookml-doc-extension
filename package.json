@@ -1,0 +1,72 @@
+{
+  "name": "lookml-explore-doc",
+  "displayName": "LookML Explore Doc",
+  "description": "Generate Excel documentation (labels, groups, mart lineage, business logic) for LookML explores, fully offline.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "workspaceContains:**/*.model.lkml"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "lookmlDoc.generateExplore",
+        "title": "LookML Doc: Generate Explore Documentation"
+      },
+      {
+        "command": "lookmlDoc.generateModel",
+        "title": "LookML Doc: Generate Documentation for All Explores in a Model"
+      }
+    ],
+    "configuration": {
+      "title": "LookML Explore Doc",
+      "properties": {
+        "lookmlDoc.remoteProjects": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "Map LookML project names used in `//project/...` includes to local folders. `${workspaceFolder}` is supported. Example: `{ \"one-hub\": \"D:/CLT/lookml_one_hub\", \"one-crm-spoke\": \"${workspaceFolder}\" }`",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "lookmlDoc.outputDir": {
+          "type": "string",
+          "default": "",
+          "description": "Default folder for generated Excel files. Empty = parent folder of the workspace (keeps files out of the LookML repo)."
+        },
+        "lookmlDoc.codeLens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a 'Generate Doc' CodeLens above each explore."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -watch -p .",
+    "bundle": "esbuild src/extension.ts --bundle --platform=node --target=node18 --format=cjs --external:vscode --outfile=dist/extension.js --minify",
+    "vscode:prepublish": "npm run compile && npm run bundle",
+    "package": "vsce package --no-dependencies --skip-license --allow-missing-repository"
+  },
+  "dependencies": {
+    "exceljs": "4.4.0",
+    "liquidjs": "10.19.0",
+    "minimatch": "9.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "@types/vscode": "1.90.0",
+    "@vscode/vsce": "3.2.1",
+    "esbuild": "0.23.1",
+    "typescript": "5.5.4"
+  }
+}
