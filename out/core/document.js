@@ -184,7 +184,7 @@ function buildRow(model, explore, c, resolver) {
         lookerLabel,
         viewLabel,
         groupLabel: r((0, parser_1.getText)(def.entries, 'group_label')),
-        groupItemLabel: r((0, parser_1.getText)(def.entries, 'group_item_label')),
+        groupItemLabel: r((0, parser_1.getText)(def.entries, 'group_item_label')) || lookerLabel,
         category: def.kind === 'dimension_group' ? 'dimension' : def.kind,
         description: r((0, parser_1.getText)(def.entries, 'description')),
         key: `${view.name}.${fieldId}`,

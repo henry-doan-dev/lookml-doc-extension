@@ -213,7 +213,7 @@ function buildRow(model: LookmlModel, explore: ResolvedExplore, c: Candidate, re
     lookerLabel,
     viewLabel,
     groupLabel: r(getText(def.entries, 'group_label')),
-    groupItemLabel: r(getText(def.entries, 'group_item_label')),
+    groupItemLabel: r(getText(def.entries, 'group_item_label')) || lookerLabel,
     category: def.kind === 'dimension_group' ? 'dimension' : def.kind,
     description: r(getText(def.entries, 'description')),
     key: `${view.name}.${fieldId}`,

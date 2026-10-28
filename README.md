@@ -38,7 +38,7 @@ Tên project trong `//xxx/...` mà không được khai báo trong `manifest.lkm
 |---|---|
 | Looker Label | `label` (đã render Liquid và `@{constant}`). Nếu không có thì lấy tên field dạng Title Case. Với timeframe thì là `label` + tên timeframe |
 | Looker View Label | Lấy giá trị đầu tiên có trong thứ tự: `view_label` của field → `view_label` của join/explore → `view_label`/`label` của view → tên alias |
-| Looker Group Label / Group Item Label | `group_label` / `group_item_label` (đã render). Không có thì để trống |
+| Looker Group Label / Group Item Label | `group_label` / `group_item_label` (đã render). Không có `group_label` thì để trống; không có `group_item_label` thì lấy giá trị của Looker Label |
 | Category | `dimension` (gồm cả dimension_group) / `measure` / `parameter` / `filter` |
 | Key / View Name / Field Identifier | `<view gốc>.<field>` / view gốc / tên field (kèm hậu tố timeframe nếu có) |
 | Mart Table / View, Mart Column | Lần đệ quy `${...}` → `${TABLE}.col` → SQL của derived table (gồm CTE, UNION, subquery, PIVOT, `${view.SQL_TABLE_NAME}`, `sql_table_name: (SELECT ...)`, `explore_source`) cho tới bảng BigQuery gốc |
